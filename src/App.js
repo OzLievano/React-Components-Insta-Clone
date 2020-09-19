@@ -19,9 +19,7 @@ const App = () => {
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
   const [ posts, setPosts ] = useState(dummyData);
-  const [term, setTerm] = useState("");
-
-  console.log(posts);
+  
 
   const likePost = postId => {
     /*
@@ -35,12 +33,17 @@ const App = () => {
         - if the `id` of the post matches `postId`, return a new post object with the desired values (use the spread operator).
         - otherwise just return the post object unchanged.
      */
+    const newPosts =[...posts] // creates a copy of the array 
 
-    setPosts(posts.map(post =>{
+    const changedPost = newPosts.map(post => {
       if(postId === post.id){
-        return{...post, likes: post.likes + 1}
+         post.likes +=1 
+         //if in a conditional return will provide undefined
       }
-    }))
+      return post;
+    })
+    
+    setPosts(changedPost);
   };
 
   return (
